@@ -1,0 +1,46 @@
+# ============================================
+# Ride The Tide — Cape Town Peptide Club
+# https://www.capetownpeptideclub.co.za
+# ============================================
+
+# All standard crawlers
+User-agent: *
+Allow: /
+Allow: /#/shop
+Allow: /#/research
+Allow: /#/parse
+Allow: /#/trials
+Disallow: /#/login
+Disallow: /#/checkout
+Disallow: /#/cart
+
+# AI/LLM crawlers — allow for citation & discovery
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Sitemap
+Sitemap: https://www.capetownpeptideclub.co.za/sitemap.xml
+
+# Crawl rate
+Crawl-delay: 1
