@@ -44,7 +44,7 @@ export default function Navigation() {
             </Link>
           ))}
           <a
-            href="https://www.ridethetide.site/"
+            href="https://peptide-south-africa.com/shop?utm_source=club&utm_medium=nav&utm_campaign=ecosystem"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono-tech text-[10px] tracking-[0.15em] text-[#8b7aff] hover:text-[#a89aff] transition-colors flex items-center gap-1"
@@ -91,13 +91,13 @@ export default function Navigation() {
             </Link>
           ))}
           <a
-            href="https://www.ridethetide.site/"
+            href="https://peptide-south-africa.com/shop?utm_source=club&utm_medium=nav&utm_campaign=ecosystem"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMobileOpen(false)}
             className="block py-2 font-mono-tech text-xs tracking-wider text-[#8b7aff] hover:text-[#a89aff]"
           >
-            SHOP (RIDE THE TIDE)
+            SHOP (PEPTIDE SA)
           </a>
           <Link
             to="/trials"

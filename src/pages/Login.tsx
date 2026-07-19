@@ -71,7 +71,7 @@ export default function Login() {
           </Link>
 
           <a
-            href="https://www.ridethetide.site/"
+            href="https://peptide-south-africa.com/shop?utm_source=club&utm_medium=login&utm_campaign=ecosystem"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-4 border border-white/[0.08] hover:border-[#8b7aff]/30 hover:bg-[#8b7aff]/[0.03] transition-all group"
@@ -79,7 +79,7 @@ export default function Login() {
             <FlaskConical className="w-4 h-4 text-white/30 group-hover:text-[#8b7aff] transition-colors" />
             <div className="flex-1">
               <span className="font-sans text-sm text-white/70 group-hover:text-white transition-colors">Shop Peptides</span>
-              <p className="font-sans text-[11px] text-white/30 mt-0.5">Browse HPLC-verified compounds at Ride The Tide</p>
+              <p className="font-sans text-[11px] text-white/30 mt-0.5">Browse HPLC-verified compounds at Peptide South Africa</p>
             </div>
             <ArrowRight className="w-3 h-3 text-white/20 group-hover:text-[#8b7aff]" />
           </a>

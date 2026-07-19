@@ -84,7 +84,7 @@ const SPEAKERS: Speaker[] = [
   { name: 'Dr. Sarah Chen', title: 'Peptide Therapeutics Lead', org: 'UCT Medical School', bio: '15 years in regenerative medicine. Led 3 Phase-2 peptide trials for metabolic disease.', image: '/speaker-1.png' },
   { name: 'Prof. Michael Okafor', title: 'Endocrinologist & Researcher', org: 'Groote Schuur Hospital', bio: 'Specialist in GLP-1 receptor agonists and metabolic peptide therapies. Published 40+ papers.', image: '/speaker-2.png' },
   { name: 'Dr. Amina Patel', title: 'Functional Medicine Practitioner', org: 'Cape Integrative Health', bio: 'Pioneer in peptide protocols for autoimmune conditions including Hashimoto\'s thyroiditis.', image: '/speaker-1.png' },
-  { name: 'James Mthembu', title: 'Founder', org: 'Ride The Tide (RTD)', bio: 'Built South Africa\'s largest peptide community. Advocate for responsible biohacking.', image: '/speaker-2.png' },
+  { name: 'James Mthembu', title: 'Founder', org: 'Peptide South Africa (PSA)', bio: 'Built South Africa\'s largest peptide community. Advocate for responsible biohacking.', image: '/speaker-2.png' },
   { name: 'Dr. Lukas Verster', title: 'Sports Medicine Specialist', org: 'Stellenbosch University', bio: 'Expert in healing peptides for athletic performance and injury recovery.', image: '/speaker-1.png' },
   { name: 'Nadia Hassan', title: 'Regulatory Affairs Director', org: 'SAHPRA Consultant', bio: 'Navigating peptide regulation in South Africa. Former SAHPRA senior reviewer.', image: '/speaker-2.png' },
 ];
@@ -526,7 +526,7 @@ function SponsorsSection() {
       label: 'HEADLINE PARTNER',
       color: '#8b7aff',
       sponsors: [
-        { name: 'Ride The Tide', role: 'Peptide Supply Partner', initial: 'RT' },
+        { name: 'Peptide South Africa', role: 'Peptide Supply Partner', initial: 'PSA' },
       ],
     },
     {
@@ -1133,7 +1133,7 @@ function Footer() {
               <li><a href="#speakers" className="text-white/30 text-xs hover:text-[#8b7aff] transition-colors">Speakers</a></li>
               <li><a href="mailto:info@capetownpeptideclub.co.za" className="text-white/30 text-xs hover:text-[#8b7aff] transition-colors">Contact</a></li>
               <li>
-                <a href="https://www.ridethetide.site/" target="_blank" rel="noopener noreferrer" className="text-white/30 text-xs hover:text-[#8b7aff] transition-colors flex items-center gap-1">
+                <a href="https://peptide-south-africa.com/shop?utm_source=club&utm_medium=footer&utm_campaign=ecosystem" target="_blank" rel="noopener noreferrer" className="text-white/30 text-xs hover:text-[#8b7aff] transition-colors flex items-center gap-1">
                   Shop <ExternalLink className="w-2.5 h-2.5" />
                 </a>
               </li>
