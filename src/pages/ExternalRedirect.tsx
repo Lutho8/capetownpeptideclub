@@ -10,7 +10,7 @@ export default function ExternalRedirect({ url }: { url: string }) {
     <div className="min-h-screen bg-black flex items-center justify-center px-6">
       <SEO
         title="Shop Peptides | Cape Town Peptide Club"
-        description="Browse and purchase HPLC-verified research peptides at Ride The Tide."
+        description="Browse and purchase HPLC-verified research peptides at Peptide South Africa."
       />
       <div className="text-center space-y-4">
         <div className="w-8 h-8 border-2 border-[#8b7aff] border-t-transparent rounded-full animate-spin mx-auto" />

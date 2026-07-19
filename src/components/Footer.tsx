@@ -32,7 +32,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><Link to="/research" className="text-white/25 text-xs hover:text-[#c8ff00] transition-colors">Guides</Link></li>
               <li>
-                <a href="https://www.ridethetide.site/" target="_blank" rel="noopener noreferrer" className="text-white/25 text-xs hover:text-[#c8ff00] transition-colors flex items-center gap-1">
+                <a href="https://peptide-south-africa.com/shop?utm_source=club&utm_medium=footer&utm_campaign=ecosystem" target="_blank" rel="noopener noreferrer" className="text-white/25 text-xs hover:text-[#c8ff00] transition-colors flex items-center gap-1">
                   Shop <ExternalLink className="w-2.5 h-2.5" />
                 </a>
               </li>
