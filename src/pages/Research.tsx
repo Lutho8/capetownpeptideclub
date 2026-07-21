@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { ArrowLeft, BookOpen, FlaskConical, Clock, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, BookOpen, FlaskConical, Clock, AlertTriangle, ArrowRight, Smartphone, ShoppingBag } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
@@ -108,6 +108,40 @@ const GUIDES: Guide[] = [
   },
 ];
 
+/* ─── Ecosystem Banner ─── */
+function EcosystemBanner() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+      <a
+        href="https://peptide-south-africa.co.za?utm_source=club&utm_medium=guides_page&utm_campaign=ecosystem"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-3 p-4 border border-[#8b7aff]/20 rounded-xl bg-[#8b7aff]/[0.02] hover:bg-[#8b7aff]/[0.05] transition-colors group"
+      >
+        <Smartphone className="w-5 h-5 text-[#8b7aff] shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-white text-xs font-medium">Track your protocol in the PSA App</p>
+          <p className="text-white/30 text-[10px]">Dosing reminders, progress tracking, stack builder</p>
+        </div>
+        <ArrowRight className="w-4 h-4 text-[#8b7aff] group-hover:translate-x-0.5 transition-transform" />
+      </a>
+      <a
+        href="https://peptide-south-africa.com/shop?utm_source=club&utm_medium=guides_page&utm_campaign=ecosystem"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-3 p-4 border border-[#c8ff00]/20 rounded-xl bg-[#c8ff00]/[0.02] hover:bg-[#c8ff00]/[0.05] transition-colors group"
+      >
+        <ShoppingBag className="w-5 h-5 text-[#c8ff00] shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-white text-xs font-medium">HPLC-Verified Peptides — Same-Day Dispatch</p>
+          <p className="text-white/30 text-[10px]">COA on every batch. Cape Town stocked.</p>
+        </div>
+        <ArrowRight className="w-4 h-4 text-[#c8ff00] group-hover:translate-x-0.5 transition-transform" />
+      </a>
+    </div>
+  );
+}
+
 /* ─── Sub-Nav ─── */
 function SubNav({ active }: { active: string }) {
   const pills = [
@@ -207,6 +241,9 @@ export default function Research() {
         </div>
 
         <div className="max-w-2xl mx-auto px-5">
+          {/* Ecosystem CTAs */}
+          <EcosystemBanner />
+
           <div className="space-y-3 pb-20">
             {GUIDES.map((guide, i) => (
               <button

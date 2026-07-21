@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { Link } from 'react-router';
-import { ArrowLeft, TrendingUp, MessageCircle, Search, X } from 'lucide-react';
+import { ArrowLeft, TrendingUp, MessageCircle, Search, X, ArrowRight, Smartphone, ShoppingBag, FlaskConical, BookOpen, Users } from 'lucide-react';
 import SEO from '@/components/SEO';
 import { CONFESSIONS } from '@/data/confessions';
 import Footer from '@/components/Footer';
@@ -18,6 +18,7 @@ interface Topic {
   description: string;
   reportCount: number;
   confessions: TopicConfession[];
+  guide?: string;
 }
 
 function getTopicConfessions(topicIds: string[]): TopicConfession[] {
@@ -37,59 +38,59 @@ function countTopic(topicIds: string[]): number {
 const TOPICS: Topic[] = [
   {
     id: 'peptides-for-weight-loss',
-    title: 'Peptides for Weight Loss',
-    description: 'GLP-1 agonists and metabolic peptides — semaglutide, tirzepatide, retatrutide. The most discussed category in the confessions archive.',
+    title: 'Weight Loss',
+    description: 'GLP-1 agonists and metabolic peptides — semaglutide, tirzepatide, retatrutide. The most discussed category.',
     reportCount: 0,
     confessions: [],
+    guide: 'Real user timelines, dosing protocols, and what to expect weeks 1-12.',
   },
   {
     id: 'peptides-for-recovery',
-    title: 'Peptides for Recovery',
-    description: 'BPC-157, TB-500, GHK-Cu — injury repair, gut healing, and tissue regeneration. The second most reported category.',
+    title: 'Recovery & Healing',
+    description: 'BPC-157, TB-500, GHK-Cu — injury repair, gut healing, and tissue regeneration.',
     reportCount: 0,
     confessions: [],
+    guide: 'Local vs systemic injection, protocol length, and when to expect results.',
   },
   {
     id: 'best-peptide-stacks',
-    title: 'Best Peptide Stacks',
-    description: 'What combinations people actually run — CJC/ipamorelin, BPC/TB, and the ever-expanding personal protocols.',
+    title: 'Stacks & Protocols',
+    description: 'What combinations people actually run — CJC/ipamorelin, BPC/TB, and advanced personal protocols.',
     reportCount: 0,
     confessions: [],
+    guide: 'Beginner, intermediate, and advanced stacks with real user feedback.',
   },
   {
     id: 'peptide-side-effects',
-    title: 'Peptide Side Effects',
+    title: 'Side Effects',
     description: 'The uncomfortable truths — nausea, hair loss, hormonal disruption, and what nobody mentions in the marketing.',
     reportCount: 0,
     confessions: [],
+    guide: 'How to manage common sides and when to stop.',
   },
   {
     id: 'peptides-for-women',
-    title: 'Peptides for Women',
-    description: 'Period disruption, libido changes, PT-141 experiences — the reports the general community rarely discusses.',
+    title: 'Women\'s Experiences',
+    description: 'Period disruption, libido changes, PT-141 experiences — reports the general community rarely discusses.',
     reportCount: 0,
     confessions: [],
+    guide: 'Female-specific considerations and compound selection.',
   },
   {
     id: 'mental-health',
-    title: 'Mental Health & Motivation',
-    description: 'How peptides affect mood, anxiety, drive, focus, and the mental side of biohacking nobody prepared for.',
+    title: 'Mental Health & Drive',
+    description: 'How peptides affect mood, anxiety, motivation, focus, and the mental side of biohacking.',
     reportCount: 0,
     confessions: [],
+    guide: 'Nootropic peptides, motivation changes, and emotional regulation.',
   },
   {
     id: 'sourcing',
     title: 'Sourcing & Pricing',
-    description: 'The economics of peptides — clinic vs grey market, China bulk, margins, and the realities of the supply chain.',
+    description: 'The economics of peptides — clinic vs grey market, testing, and supply chain realities.',
     reportCount: 0,
     confessions: [],
-  },
-  {
-    id: 'before-after',
-    title: 'Before & After',
-    description: 'Timeline reports — what changed, when it changed, and what users actually noticed versus what they expected.',
-    reportCount: 0,
-    confessions: [],
+    guide: 'How to verify purity, read COAs, and avoid scams.',
   },
   {
     id: 'success-stories',
@@ -97,48 +98,39 @@ const TOPICS: Topic[] = [
     description: 'Life-changing outcomes — diabetes remission, migraine cures, injury recovery that defied conventional medicine.',
     reportCount: 0,
     confessions: [],
+    guide: 'Long-term maintenance and keeping results.',
   },
   {
     id: 'peptides-for-skin',
-    title: 'Peptides for Skin & Hair',
+    title: 'Skin & Hair',
     description: 'GHK-Cu, BPC-157, and their effects on skin aging, scarring, dermatitis, and hair quality.',
     reportCount: 0,
     confessions: [],
+    guide: 'Topical vs injectable, and realistic timelines.',
   },
   {
     id: 'peptides-for-sexual-health',
     title: 'Sexual Health',
-    description: 'PT-141, kisspeptin, melanotan — libido enhancement, erectile function, and the reports too honest for mainstream forums.',
+    description: 'PT-141, kisspeptin, melanotan — libido enhancement and the reports too honest for mainstream forums.',
     reportCount: 0,
     confessions: [],
+    guide: 'Dosing, timing, and combination strategies.',
   },
   {
     id: 'growth-hormone-peptides',
-    title: 'Growth Hormone Peptides',
-    description: 'CJC-1295, ipamorelin, sermorelin — sleep quality, recovery, body composition, and the GH secretagogue experience.',
+    title: 'Growth Hormone',
+    description: 'CJC-1295, ipamorelin, sermorelin — sleep quality, recovery, body composition.',
     reportCount: 0,
     confessions: [],
-  },
-  {
-    id: 'bpc-157',
-    title: 'BPC-157 Deep Dive',
-    description: 'The most popular healing peptide — gut repair, tendon recovery, injection techniques, and when it fails.',
-    reportCount: 0,
-    confessions: [],
+    guide: 'Sleep architecture changes and long-term GH protocols.',
   },
   {
     id: 'retatrutide',
     title: 'Retatrutide Deep Dive',
-    description: 'The triple agonist — weight loss, dose protocols, side effects, and the community obsession explained.',
+    description: 'The triple agonist — weight loss, dose protocols, side effects, and the community obsession.',
     reportCount: 0,
     confessions: [],
-  },
-  {
-    id: 'tirzepatide',
-    title: 'Tirzepatide Deep Dive',
-    description: 'The dual GIP/GLP-1 — Mounjaro experiences, comparisons to semaglutide, and unexpected benefits like migraine relief.',
-    reportCount: 0,
-    confessions: [],
+    guide: 'Complete retatrutide guide: from first pin to maintenance.',
   },
 ];
 
@@ -151,14 +143,11 @@ const TOPIC_PEPTIDE_MAP: Record<string, string[]> = {
   'peptides-for-women': ['PT-141', 'BPC-157', 'TB-500', 'Retatrutide', 'Tirzepatide', 'MOTS-c'],
   'mental-health': ['Retatrutide', 'Tirzepatide', 'Semaglutide', 'Selank', 'Semax', 'SS-31'],
   'sourcing': ['Retatrutide', 'Tirzepatide', 'BPC-157', 'GHK-Cu'],
-  'before-after': ['Retatrutide', 'Semaglutide', 'BPC-157', 'GHK-Cu', 'CJC-1295'],
   'success-stories': ['Retatrutide', 'Tirzepatide', 'Semaglutide', 'BPC-157', 'Selank'],
   'peptides-for-skin': ['GHK-Cu', 'BPC-157', 'Thymosin Alpha-1', 'KPV'],
   'peptides-for-sexual-health': ['PT-141', 'Kisspeptin', 'Melanotan II', 'Retatrutide'],
   'growth-hormone-peptides': ['CJC-1295', 'Ipamorelin', 'Sermorelin'],
-  'bpc-157': ['BPC-157'],
   'retatrutide': ['Retatrutide'],
-  'tirzepatide': ['Tirzepatide'],
 };
 
 TOPICS.forEach((t) => {
@@ -193,6 +182,40 @@ function SubNav({ active }: { active: string }) {
   );
 }
 
+/* ─── Ecosystem Banner ─── */
+function EcosystemBanner() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+      <a
+        href="https://peptide-south-africa.co.za?utm_source=club&utm_medium=topics_page&utm_campaign=ecosystem"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-3 p-4 border border-[#8b7aff]/20 rounded-xl bg-[#8b7aff]/[0.02] hover:bg-[#8b7aff]/[0.05] transition-colors group"
+      >
+        <Smartphone className="w-5 h-5 text-[#8b7aff] shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-white text-xs font-medium">Track your protocol in the PSA App</p>
+          <p className="text-white/30 text-[10px]">Dosing reminders, progress tracking, stack builder</p>
+        </div>
+        <ArrowRight className="w-4 h-4 text-[#8b7aff] group-hover:translate-x-0.5 transition-transform" />
+      </a>
+      <a
+        href="https://peptide-south-africa.com/shop?utm_source=club&utm_medium=topics_page&utm_campaign=ecosystem"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-3 p-4 border border-[#c8ff00]/20 rounded-xl bg-[#c8ff00]/[0.02] hover:bg-[#c8ff00]/[0.05] transition-colors group"
+      >
+        <ShoppingBag className="w-5 h-5 text-[#c8ff00] shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-white text-xs font-medium">HPLC-Verified Peptides — Same-Day Dispatch</p>
+          <p className="text-white/30 text-[10px]">COA on every batch. Cape Town stocked.</p>
+        </div>
+        <ArrowRight className="w-4 h-4 text-[#c8ff00] group-hover:translate-x-0.5 transition-transform" />
+      </a>
+    </div>
+  );
+}
+
 export default function Parse() {
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
   const [search, setSearch] = useState('');
@@ -204,7 +227,7 @@ export default function Parse() {
   if (selectedTopic) {
     return (
       <div className="min-h-screen bg-black pt-14">
-        <SEO title={`${selectedTopic.title} | CTPC Confessions`} description={selectedTopic.description} path="/parse" />
+        <SEO title={`${selectedTopic.title} | CTPC Community Topic`} description={selectedTopic.description} path="/parse" />
         <div className="fixed inset-0 pointer-events-none z-0" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(200,255,0,0.012) 2px, rgba(200,255,0,0.012) 4px)' }} />
 
         <div className="relative z-10 max-w-2xl mx-auto px-5">
@@ -216,6 +239,15 @@ export default function Parse() {
 
           <h1 className="font-serif-display text-3xl md:text-4xl text-white mb-2">{selectedTopic.title}</h1>
           <p className="text-white/35 text-sm leading-relaxed mb-4">{selectedTopic.description}</p>
+
+          {/* Community guide snippet */}
+          {selectedTopic.guide && (
+            <div className="flex items-start gap-2 p-3 border border-white/[0.06] rounded-lg bg-white/[0.01] mb-6">
+              <BookOpen className="w-3.5 h-3.5 text-[#c8ff00]/50 shrink-0 mt-0.5" />
+              <p className="text-white/40 text-xs leading-relaxed">{selectedTopic.guide}</p>
+            </div>
+          )}
+
           <div className="inline-flex items-center px-3 py-1 bg-white/[0.05] rounded-full border border-white/[0.08] mb-8">
             <span className="text-[#c8ff00] text-sm font-semibold mr-1.5">{selectedTopic.confessions.length}</span>
             <span className="text-white/30 text-[11px]">anonymous reports</span>
@@ -250,7 +282,7 @@ export default function Parse() {
 
   return (
     <div className="min-h-screen bg-black pt-14">
-      <SEO title="Topics | Browse Confessions by Theme | CTPC" description={`${TOPICS.length} topics covering weight loss, recovery, side effects, stacks, mental health, and more. Browse anonymous peptide confessions by theme.`} path="/parse" />
+      <SEO title="Community Topics | Browse Confessions by Theme | CTPC" description={`${TOPICS.length} topics covering weight loss, recovery, side effects, stacks, mental health, and more. Browse anonymous peptide confessions by theme.`} path="/parse" />
       <div className="fixed inset-0 pointer-events-none z-0" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(200,255,0,0.012) 2px, rgba(200,255,0,0.012) 4px)' }} />
 
       <div className="relative z-10">
@@ -258,13 +290,16 @@ export default function Parse() {
 
         {/* Hero */}
         <div className="text-center pt-8 pb-6 px-5">
-          <h1 className="font-serif-display text-4xl md:text-6xl text-white">topics</h1>
+          <h1 className="font-serif-display text-4xl md:text-6xl text-white">community topics</h1>
           <p className="text-white/30 text-sm mt-3 max-w-md mx-auto">
-            {TOPICS.length} categories · browse confessions by theme
+            {TOPICS.length} categories · browse confessions by theme · curated community guides
           </p>
         </div>
 
         <div className="max-w-2xl mx-auto px-5">
+          {/* Ecosystem CTAs */}
+          <EcosystemBanner />
+
           {/* Search */}
           <div className="relative mb-6">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20" />
@@ -295,6 +330,12 @@ export default function Parse() {
                       {topic.title}
                     </h3>
                     <p className="text-white/25 text-xs leading-relaxed line-clamp-2">{topic.description}</p>
+                    {topic.guide && (
+                      <p className="text-white/15 text-[10px] mt-1 flex items-center gap-1">
+                        <BookOpen className="w-2.5 h-2.5" />
+                        {topic.guide}
+                      </p>
+                    )}
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
                     <TrendingUp className="w-3 h-3 text-white/15 group-hover:text-[#c8ff00]/50 transition-colors" />
