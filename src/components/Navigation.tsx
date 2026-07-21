@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
-import { Menu, X, ShoppingBag, Home, FlaskConical, BookOpen, Tag, Heart } from 'lucide-react';
+import { Menu, X, ShoppingBag, Home, FlaskConical, BookOpen, Tag, Heart, Smartphone } from 'lucide-react';
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -53,8 +53,17 @@ export default function Navigation() {
           </a>
         </div>
 
-        {/* Right: Confessions CTA */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Right: Confessions + App CTAs */}
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="https://peptide-south-africa.co.za?utm_source=club&utm_medium=nav&utm_campaign=ecosystem"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-1.5 font-mono-tech text-[10px] tracking-wider border border-[#8b7aff]/30 text-[#8b7aff] hover:bg-[#8b7aff]/10 transition-all flex items-center gap-1.5"
+          >
+            <Smartphone className="w-3 h-3" />
+            APP
+          </a>
           <Link
             to="/trials"
             className={`px-4 py-1.5 font-mono-tech text-[10px] tracking-wider transition-all flex items-center gap-1.5 ${
@@ -98,6 +107,15 @@ export default function Navigation() {
             className="block py-2 font-mono-tech text-xs tracking-wider text-[#8b7aff] hover:text-[#a89aff]"
           >
             SHOP (PEPTIDE SA)
+          </a>
+          <a
+            href="https://peptide-south-africa.co.za?utm_source=club&utm_medium=nav&utm_campaign=ecosystem"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMobileOpen(false)}
+            className="block py-2 font-mono-tech text-xs tracking-wider text-[#8b7aff] hover:text-[#a89aff]"
+          >
+            PSA APP
           </a>
           <Link
             to="/trials"
